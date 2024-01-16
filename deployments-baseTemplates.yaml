@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {app name}
+  namespace: argocd
+spec:
+  destination:
+    namespace: {destination namespace}
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+  - repoURL: {repo url}
+    targetRevision: main
+    path: {deployment files path}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=false
